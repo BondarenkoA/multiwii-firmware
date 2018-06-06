@@ -32,7 +32,7 @@
 /*************************************************************************************************/
 
   /**************************    The type of multicopter    ****************************/
-    //#define GIMBAL
+    #define GIMBAL
     //#define BI
     //#define TRI
     //#define QUADP
@@ -64,7 +64,7 @@
 
   /****************************    Motor maxthrottle    *******************************/
     /* this is the maximum value for the ESCs at full power, this value can be increased up to 2000 */
-    #define MAXTHROTTLE 1850
+    #define MAXTHROTTLE 2000
 
   /****************************    Mincommand          *******************************/
     /* this is the value for the ESCs when they are not armed
@@ -72,12 +72,12 @@
     #define MINCOMMAND  1000
 
   /**********************************  I2C speed for old WMP config (useless config for other sensors)  *************/
-    #define I2C_SPEED 100000L     //100kHz normal mode, this value must be used for a genuine WMP
+    #define I2C_SPEED 400000L     //100kHz normal mode, this value must be used for a genuine WMP
     //#define I2C_SPEED 400000L   //400kHz fast mode, it works only with some WMP clones
 
   /***************************    Internal i2c Pullups   ********************************/
     /* enable internal I2C pull ups (in most cases it is better to use external pullups) */
-    //#define INTERNAL_I2C_PULLUPS
+    #define INTERNAL_I2C_PULLUPS
 
   /**********************************  constant loop time  ******************************/
     #define LOOP_TIME 2800
@@ -169,7 +169,7 @@
       //#define ITG3200
       //#define MPU3050
       //#define L3G4200D
-      //#define MPU6050       //combo + ACC
+      #define MPU6050       //combo + ACC
       //#define LSM330        //combo + ACC
       
       /* I2C accelerometer */
@@ -202,8 +202,10 @@
       //#define ADCACC
 
       /* enforce your individual sensor orientation - even overrides board specific defaults */
-      //#define FORCE_ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  =  Y; imu.accADC[PITCH]  = -X; imu.accADC[YAW]  = Z;}
-      //#define FORCE_GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] = -Y; imu.gyroADC[PITCH] =  X; imu.gyroADC[YAW] = Z;}
+      #define FORCE_ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = X; imu.accADC[PITCH]  = Y; imu.accADC[YAW]  = Z;}
+      #define FORCE_GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] = -Y; imu.gyroADC[PITCH] =  X; imu.gyroADC[YAW] = -Z;}
+      //#define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = Y; imu.accADC[PITCH]  = X; imu.accADC[YAW]  = -Z;}
+      //#define GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] = -X; imu.gyroADC[PITCH] =  Y; imu.gyroADC[YAW] = Z;}
       //#define FORCE_MAG_ORIENTATION(X, Y, Z)  {imu.magADC[ROLL]  =  X; imu.magADC[PITCH]  =  Y; imu.magADC[YAW]  = Z;}
 
       /* Board orientation shift */
@@ -252,15 +254,15 @@
 
     /* if you want to preset min/middle/max values for servos right after flashing, because of limited physical
      * room for servo travel, then you must enable and set all three following options */
-     //#define SERVO_MIN  {1020, 1020, 1020, 1020, 1020, 1020, 1020, 1020}
-     //#define  SERVO_MAX {2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000}
-     //#define  SERVO_MID {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500} // (*)
-     //#define FORCE_SERVO_RATES      {30,30,100,100,100,100,100,100} // 0 = normal, 1= reverse
+     #define SERVO_MIN  {600, 1020, 1020, 1020, 1020, 1020, 1020, 1020}
+     #define  SERVO_MAX {2500, 2000, 2000, 2000, 2000, 2000, 2000, 2000}
+     #define  SERVO_MID {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500} // (*)
+     #define FORCE_SERVO_RATES      {1,1,100,100,100,100,100,100} // 0 = normal, 1= reverse
 
   /***********************          Cam Stabilisation             ***********************/
     /* The following lines apply only for a pitch/roll tilt stabilization system. Uncomment the first or second line to activate it */
     //#define SERVO_MIX_TILT
-    //#define SERVO_TILT
+    #define SERVO_TILT
 
     /* camera trigger function : activated via Rc Options in the GUI, servo output=A2 on promini */
     // trigger interval can be changed via (*GUI*) or via AUX channel
@@ -423,7 +425,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
     /*********************************    Aux 2 Pin     ***********************************/
       /* possibility to use PIN8 or PIN12 as the AUX2 RC input (only one, not both)
          it deactivates in this case the POWER PIN (pin 12) or the BUZZER PIN (pin 8) */
-      //#define RCAUXPIN8
+      #define RCAUXPIN8
       //#define RCAUXPIN12
 
 
@@ -523,7 +525,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
       //#define GYRO_LPF_188HZ
       //#define GYRO_LPF_98HZ
       //#define GYRO_LPF_42HZ
-      //#define GYRO_LPF_20HZ
+      #define GYRO_LPF_20HZ
       //#define GYRO_LPF_10HZ
       //#define GYRO_LPF_5HZ       // Use this only in extreme cases, rather change motors and/or props -- setting not available on ITG3200
 
@@ -531,7 +533,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
       /* GYRO_SMOOTHING. In case you cannot reduce vibrations _and_ _after_ you have tried the low pass filter options, you
          may try this gyro smoothing via averaging. Not suitable for multicopters!
          Good results for helicopter, airplanes and flying wings (foamies) with lots of vibrations.*/
-      //#define GYRO_SMOOTHING {20, 20, 3}    // (*) separate averaging ranges for roll, pitch, yaw
+      #define GYRO_SMOOTHING {20, 20, 3}    // (*) separate averaging ranges for roll, pitch, yaw
 
     /************************    Moving Average Gyros    **********************************/
       //#define MMGYRO 10                      // (*) Active Moving Average Function for Gyros
@@ -597,7 +599,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
        PITCH, ROLL and YAW is centered and THROTTLE is set to FAILSAFE_THROTTLE value. You must set this value to descending about 1m/s or so
        for best results. This value is depended from your configuration, AUW and some other params.  Next, after FAILSAFE_OFF_DELAY the copter is disarmed, 
        and motors is stopped. If RC pulse coming back before reached FAILSAFE_OFF_DELAY time, after the small quard time the RC control is returned to normal. */
-    //#define FAILSAFE                                // uncomment  to activate the failsafe function
+    #define FAILSAFE                                // uncomment  to activate the failsafe function
     #define FAILSAFE_DELAY     10                     // Guard time for failsafe activation after signal lost. 1 step = 0.1sec - 1sec in example
     #define FAILSAFE_OFF_DELAY 200                    // Time for Landing before motors stop in 0.1sec. 1 step = 0.1sec - 20sec in example
     #define FAILSAFE_THROTTLE  (MINTHROTTLE + 200)    // (*) Throttle level used for landing - may be relative to MINTHROTTLE - as in this case
@@ -671,7 +673,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
                                    // note: Now a GPS can share MSP on the same port. The only constrain is to not use it simultaneously, and use the same port speed.
 
     // avoid using 115200 baud because with 16MHz arduino the 115200 baudrate have more than 2% speed error (57600 have 0.8% error)
-    #define GPS_BAUD   57600       // GPS_BAUD will override SERIALx_COM_SPEED for the selected port
+    //#define GPS_BAUD   57600       // GPS_BAUD will override SERIALx_COM_SPEED for the selected port
 
    /* GPS protocol 
        NMEA  - Standard NMEA protocol GGA, GSA and RMC  sentences are needed
@@ -695,7 +697,6 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
 
     //#define I2C_GPS
 
-    // If your I2C GPS board has Sonar support enabled
     //#define I2C_GPS_SONAR
 
     /* indicate a valid GPS fix with at least 5 satellites by flashing the LED  - Modified by MIS - Using stable LED (YELLOW on CRIUS AIO) led work as sat number indicator 
@@ -920,8 +921,8 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
        with R1=33k and R2=51k
        vbat = [0;1023]*16/VBATSCALE
        must be associated with #define BUZZER ! */
-    //#define VBAT              // uncomment this line to activate the vbat code
-    #define VBATSCALE       131 // (*) (**) change this value if readed Battery voltage is different than real voltage
+    #define VBAT              // uncomment this line to activate the vbat code
+    #define VBATSCALE       78 // (*) (**) change this value if readed Battery voltage is different than real voltage
     #define VBATNOMINAL     126 // 12,6V full battery nominal voltage - only used for lcd.telemetry
     #define VBATLEVEL_WARN1 107 // (*) (**) 10,7V
     #define VBATLEVEL_WARN2  99 // (*) (**) 9.9V
@@ -949,10 +950,10 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
        1 - hard: - (uses hardware sensor, after configuration gives very good results)
        2 - soft: - (good results +-5% for plush and mystery ESCs @ 2S and 3S, not good with SuperSimple ESC)    */
     //#define POWERMETER_SOFT
-    //#define POWERMETER_HARD
-    #define PSENSORNULL 510 /* (*) hard only: set to analogRead() value for zero current; for I=0A my sensor
+    #define POWERMETER_HARD
+    #define PSENSORNULL 512 /* (*) hard only: set to analogRead() value for zero current; for I=0A my sensor
                                    gives 1/2 Vss; that is approx 2.49Volt; */
-    #define PINT2mA 132     /* (*) hard: one integer step on arduino analog translates to mA (example 4.9 / 37 * 1000) ;
+    #define PINT2mA 74     /* (*) hard: one integer step on arduino analog translates to mA (example 4.9 / 37 * 1000) ;
                                    soft: use fictional value, start with 100.
                                    for hard and soft: larger PINT2mA will get you larger value for power (mAh equivalent) */
     //#define WATTS // compute and display the actual watts (=Volt*Ampere) consumed - requires both POWERMETER_HARD and VBAT

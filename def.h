@@ -328,7 +328,7 @@
   //RX PIN assignment inside the port //for PORTD
   #define THROTTLEPIN                2
   #define ROLLPIN                    4
-  #define PITCHPIN                   5
+  #define PITCHPIN                   11//5
   #define YAWPIN                     6
   #define AUX1PIN                    7
   #define AUX2PIN                    0 // optional PIN 8 or PIN 12
@@ -361,29 +361,40 @@
   #define SOFT_PWM_4_PIN_HIGH        PORTB |= 1<<4;
   #define SOFT_PWM_4_PIN_LOW         PORTB &= ~(1<<4);
   
-  #define SERVO_1_PINMODE            DDRC |= 1<<0; // pin A0  // TILT_PITCH - WING left
-  #define SERVO_1_PIN_HIGH           PORTC |= 1<<0;
-  #define SERVO_1_PIN_LOW            PORTC &= ~(1<<0);
+  //#define SERVO_1_PINMODE            DDRC |= 1<<0; // pin A0  // TILT_PITCH - WING left
+  //#define SERVO_1_PIN_HIGH           PORTC |= 1<<0;
+  //#define SERVO_1_PIN_LOW            PORTC &= ~(1<<0);
+
+  #define SERVO_1_PINMODE            DDRD|= 1<<5; // pin 5    // TRI REAR - BI RIGHT
+  #define SERVO_1_PIN_HIGH           PORTD|= 1<<5;
+  #define SERVO_1_PIN_LOW            PORTD &= ~(1<<5);
+  
   #define SERVO_2_PINMODE            DDRC |= 1<<1; // pin A1  // TILT_ROLL  - WING right
   #define SERVO_2_PIN_HIGH           PORTC |= 1<<1;
   #define SERVO_2_PIN_LOW            PORTC &= ~(1<<1);
+  
   #define SERVO_3_PINMODE            DDRC |= 1<<2; // pin A2  // CAM TRIG  - alt TILT_PITCH
   #define SERVO_3_PIN_HIGH           PORTC |= 1<<2;
   #define SERVO_3_PIN_LOW            PORTC &= ~(1<<2);
+  
   #if !defined(MONGOOSE1_0)
     #define SERVO_4_PINMODE            DDRB |= 1<<4; // pin 12  // new       - alt TILT_ROLL
     #define SERVO_4_PIN_HIGH           PORTB |= 1<<4;
     #define SERVO_4_PIN_LOW            PORTB &= ~(1<<4);
   #endif
+  
   #define SERVO_5_PINMODE            DDRB |= 1<<3; // pin 11  // BI LEFT
   #define SERVO_5_PIN_HIGH           PORTB |= 1<<3;
   #define SERVO_5_PIN_LOW            PORTB &= ~(1<<3);
+  
   #define SERVO_6_PINMODE            DDRD|= 1<<3; // pin 3    // TRI REAR - BI RIGHT
   #define SERVO_6_PIN_HIGH           PORTD|= 1<<3;
   #define SERVO_6_PIN_LOW            PORTD &= ~(1<<3);
+  
   #define SERVO_7_PINMODE            DDRB |= 1<<2; // pin 10  // new
   #define SERVO_7_PIN_HIGH           PORTB |= 1<<2;
   #define SERVO_7_PIN_LOW            PORTB &= ~(1<<2);
+  
   #define SERVO_8_PINMODE            DDRB |= 1<<1; // pin 9  // new
   #define SERVO_8_PIN_HIGH           PORTB |= 1<<1;
   #define SERVO_8_PIN_LOW            PORTB &= ~(1<<1);
@@ -1213,7 +1224,7 @@
 #endif
 
 #if defined(DROTEK_10DOF_MPU)
-  #define MPU6050
+  
   #define HMC5883
   #define MS561101BA
   #define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  =  Y; imu.accADC[PITCH]  = -X; imu.accADC[YAW]  = Z;}

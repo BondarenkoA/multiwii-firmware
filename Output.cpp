@@ -1449,8 +1449,8 @@ void mixTable() {
     servo[0] = get_middle(0);
     servo[1] = get_middle(1);
     if (rcOptions[BOXCAMSTAB]) {
-      servo[0] += ((int32_t)conf.servoConf[0].rate * att.angle[PITCH]) /50L;
-      servo[1] += ((int32_t)conf.servoConf[1].rate * att.angle[ROLL])  /50L;
+      servo[0] += ((int32_t)conf.servoConf[0].rate * att.angle[PITCH]) /20L;
+      servo[1] += ((int32_t)conf.servoConf[1].rate * att.angle[ROLL])  /20L;
     }
   #endif
 
