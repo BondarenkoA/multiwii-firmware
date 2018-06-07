@@ -45,7 +45,7 @@
     //#define OCTOX8
     //#define OCTOFLATP
     //#define OCTOFLATX
-    //#define FLYING_WING
+    #define FLYING_WING
     //#define VTAIL4
     //#define AIRPLANE
     //#define SINGLECOPTER
@@ -60,11 +60,11 @@
     //#define MINTHROTTLE 1120 // for Super Simple ESCs 10A
     //#define MINTHROTTLE 1064 // special ESC (simonk)
     //#define MINTHROTTLE 1050 // for brushed ESCs like ladybird
-    #define MINTHROTTLE 1150 // (*) (**)
+    #define MINTHROTTLE 1100 // (*) (**)
 
   /****************************    Motor maxthrottle    *******************************/
     /* this is the maximum value for the ESCs at full power, this value can be increased up to 2000 */
-    #define MAXTHROTTLE 1850
+    #define MAXTHROTTLE 2000
 
   /****************************    Mincommand          *******************************/
     /* this is the value for the ESCs when they are not armed
@@ -169,7 +169,7 @@
       //#define ITG3200
       //#define MPU3050
       //#define L3G4200D
-      //#define MPU6050       //combo + ACC
+      #define MPU6050       //combo + ACC
       //#define LSM330        //combo + ACC
       
       /* I2C accelerometer */
@@ -204,6 +204,8 @@
       /* enforce your individual sensor orientation - even overrides board specific defaults */
       //#define FORCE_ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  =  Y; imu.accADC[PITCH]  = -X; imu.accADC[YAW]  = Z;}
       //#define FORCE_GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] = -Y; imu.gyroADC[PITCH] =  X; imu.gyroADC[YAW] = Z;}
+      #define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = Y; imu.accADC[PITCH]  = X; imu.accADC[YAW]  = -Z;}
+      #define GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] = -X; imu.gyroADC[PITCH] =  Y; imu.gyroADC[YAW] = Z;}
       //#define FORCE_MAG_ORIENTATION(X, Y, Z)  {imu.magADC[ROLL]  =  X; imu.magADC[PITCH]  =  Y; imu.magADC[YAW]  = Z;}
 
       /* Board orientation shift */
@@ -423,7 +425,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
     /*********************************    Aux 2 Pin     ***********************************/
       /* possibility to use PIN8 or PIN12 as the AUX2 RC input (only one, not both)
          it deactivates in this case the POWER PIN (pin 12) or the BUZZER PIN (pin 8) */
-      //#define RCAUXPIN8
+      #define RCAUXPIN8
       //#define RCAUXPIN12
 
 
@@ -521,7 +523,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
          available for ITG3050, ITG3200, MPU3050, MPU6050*/
       //#define GYRO_LPF_256HZ     // This is the default setting, no need to uncomment, just for reference
       //#define GYRO_LPF_188HZ
-      //#define GYRO_LPF_98HZ
+      #define GYRO_LPF_98HZ
       //#define GYRO_LPF_42HZ
       //#define GYRO_LPF_20HZ
       //#define GYRO_LPF_10HZ
@@ -531,7 +533,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
       /* GYRO_SMOOTHING. In case you cannot reduce vibrations _and_ _after_ you have tried the low pass filter options, you
          may try this gyro smoothing via averaging. Not suitable for multicopters!
          Good results for helicopter, airplanes and flying wings (foamies) with lots of vibrations.*/
-      //#define GYRO_SMOOTHING {20, 20, 3}    // (*) separate averaging ranges for roll, pitch, yaw
+      #define GYRO_SMOOTHING {20, 20, 3}    // (*) separate averaging ranges for roll, pitch, yaw
 
     /************************    Moving Average Gyros    **********************************/
       //#define MMGYRO 10                      // (*) Active Moving Average Function for Gyros
@@ -597,7 +599,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
        PITCH, ROLL and YAW is centered and THROTTLE is set to FAILSAFE_THROTTLE value. You must set this value to descending about 1m/s or so
        for best results. This value is depended from your configuration, AUW and some other params.  Next, after FAILSAFE_OFF_DELAY the copter is disarmed, 
        and motors is stopped. If RC pulse coming back before reached FAILSAFE_OFF_DELAY time, after the small quard time the RC control is returned to normal. */
-    //#define FAILSAFE                                // uncomment  to activate the failsafe function
+    #define FAILSAFE                                // uncomment  to activate the failsafe function
     #define FAILSAFE_DELAY     10                     // Guard time for failsafe activation after signal lost. 1 step = 0.1sec - 1sec in example
     #define FAILSAFE_OFF_DELAY 200                    // Time for Landing before motors stop in 0.1sec. 1 step = 0.1sec - 20sec in example
     #define FAILSAFE_THROTTLE  (MINTHROTTLE + 200)    // (*) Throttle level used for landing - may be relative to MINTHROTTLE - as in this case
@@ -693,7 +695,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
        You have to use at least I2CGpsNav code r33 */
     /* all functionnalities allowed by SERIAL_GPS are now available for I2C_GPS: all relevant navigation computations are gathered in the main FC */
 
-    //#define I2C_GPS
+    #define I2C_GPS
 
     // If your I2C GPS board has Sonar support enabled
     //#define I2C_GPS_SONAR
@@ -920,8 +922,8 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
        with R1=33k and R2=51k
        vbat = [0;1023]*16/VBATSCALE
        must be associated with #define BUZZER ! */
-    //#define VBAT              // uncomment this line to activate the vbat code
-    #define VBATSCALE       131 // (*) (**) change this value if readed Battery voltage is different than real voltage
+    #define VBAT              // uncomment this line to activate the vbat code
+    #define VBATSCALE       78 // (*) (**) change this value if readed Battery voltage is different than real voltage
     #define VBATNOMINAL     126 // 12,6V full battery nominal voltage - only used for lcd.telemetry
     #define VBATLEVEL_WARN1 107 // (*) (**) 10,7V
     #define VBATLEVEL_WARN2  99 // (*) (**) 9.9V
@@ -949,10 +951,10 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
        1 - hard: - (uses hardware sensor, after configuration gives very good results)
        2 - soft: - (good results +-5% for plush and mystery ESCs @ 2S and 3S, not good with SuperSimple ESC)    */
     //#define POWERMETER_SOFT
-    //#define POWERMETER_HARD
-    #define PSENSORNULL 510 /* (*) hard only: set to analogRead() value for zero current; for I=0A my sensor
+    #define POWERMETER_HARD
+    #define PSENSORNULL 517 /* (*) hard only: set to analogRead() value for zero current; for I=0A my sensor
                                    gives 1/2 Vss; that is approx 2.49Volt; */
-    #define PINT2mA 132     /* (*) hard: one integer step on arduino analog translates to mA (example 4.9 / 37 * 1000) ;
+    #define PINT2mA 72     /* (*) hard: one integer step on arduino analog translates to mA (example 4.9 / 37 * 1000) ;
                                    soft: use fictional value, start with 100.
                                    for hard and soft: larger PINT2mA will get you larger value for power (mAh equivalent) */
     //#define WATTS // compute and display the actual watts (=Volt*Ampere) consumed - requires both POWERMETER_HARD and VBAT

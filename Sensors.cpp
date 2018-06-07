@@ -72,7 +72,7 @@ void i2c_init(void) {
     I2C_PULLUPS_DISABLE
   #endif
   TWSR = 0;                                    // no prescaler => prescaler = 1
-  TWBR = ((F_CPU / 400000) - 16) / 2;          // set the I2C clock rate to 400kHz
+  TWBR = ((F_CPU / I2C_SPEED) - 16) / 2;          // set the I2C clock rate to 400kHz
   TWCR = 1<<TWEN;                              // enable twi module, no interrupt
   i2c_errors_count = 0;
 }
@@ -1326,7 +1326,7 @@ void Gyro_getADC() {
   uint8_t axis;
   TWBR = ((F_CPU / I2C_SPEED) - 16) / 2; // change the I2C clock rate
   i2c_getSixRawADC(WMP_ADDRESS_2,0x00);
-  TWBR = ((F_CPU / 400000) - 16) / 2; // change the I2C clock rate.
+  //TWBR = ((F_CPU / I2C_SPEED) - 16) / 2; // change the I2C clock rate.
 
   if (micros() < (neutralizeTime + NEUTRALIZE_DELAY)) {//we neutralize data in case of blocking+hard reset state
     for (axis = 0; axis < 3; axis++) {imu.gyroADC[axis]=0;imu.accADC[axis]=0;}

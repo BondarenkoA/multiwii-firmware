@@ -1748,9 +1748,9 @@ uint8_t GPS_NewData(void) {
       i2c_read_reg_to_buf(I2C_GPS_ADDRESS, I2C_GPS_LOCATION,     (uint8_t*)&GPS_coord[LAT],4);
       i2c_read_reg_to_buf(I2C_GPS_ADDRESS, I2C_GPS_LOCATION+4,   (uint8_t*)&GPS_coord[LON],4);
       // note: the following vars are currently not used in nav code -- avoid retrieving it to save time
-      //i2c_read_reg_to_buf(I2C_GPS_ADDRESS, I2C_GPS_GROUND_SPEED, (uint8_t*)&GPS_speed,2);
-      //i2c_read_reg_to_buf(I2C_GPS_ADDRESS, I2C_GPS_ALTITUDE,     (uint8_t*)&GPS_altitude,2);
-      //i2c_read_reg_to_buf(I2C_GPS_ADDRESS, I2C_GPS_GROUND_COURSE,(uint8_t*)&GPS_ground_course,2);
+      i2c_read_reg_to_buf(I2C_GPS_ADDRESS, I2C_GPS_GROUND_SPEED, (uint8_t*)&GPS_speed,2);
+      i2c_read_reg_to_buf(I2C_GPS_ADDRESS, I2C_GPS_ALTITUDE,     (uint8_t*)&GPS_altitude,2);
+      i2c_read_reg_to_buf(I2C_GPS_ADDRESS, I2C_GPS_GROUND_COURSE,(uint8_t*)&GPS_ground_course,2);
       return 1;
     }
   }
